@@ -43,7 +43,7 @@ pip install -e .
 
 ### 方法二：直接下载源码
 
-1. 下载并解压项目源码![s15161504102025](https://a.okmd.dev/md/67f7705a6e718.png)
+1. 下载并解压项目源码
 2. 进入项目目录
 3. 运行 `pip install -e .` 安装
 
@@ -82,7 +82,7 @@ write_table_to_docx(
 
 如果你不熟悉编程，可以使用图形界面：
 
-1. 运行程序：`python -m docx_table_converter.gui`
+1. 运行程序：`python run_gui.py`
 2. 在界面中：
    - 点击"浏览"选择Excel或CSV文件，或点击"粘贴表格数据"从剪贴板导入
    - 设置表头行数
