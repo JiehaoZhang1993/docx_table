@@ -58,4 +58,4 @@ Run the executable and use the GUI to:
 
 ## License
 
-MIT 
+MIT
