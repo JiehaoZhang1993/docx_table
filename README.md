@@ -92,7 +92,7 @@ write_table_to_docx(
 3. 点击"预览"查看效果
 4. 点击"导出"保存为Word文档
 
-<img src="./img/1744269602094.png" width="400" alt="GUI界面预览">
+<img src="./img/1744277362148.png" width="400" alt="GUI界面预览">
 
 ## 参数说明
 
