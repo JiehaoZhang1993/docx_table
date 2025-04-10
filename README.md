@@ -34,6 +34,7 @@
 
 ### 方法一：从GitHub克隆
 
+
 ```bash
 git clone https://github.com/JiehaoZhang1993/docx_table.git
 cd docx_table
@@ -42,7 +43,7 @@ pip install -e .
 
 ### 方法二：直接下载源码
 
-1. 下载并解压项目源码
+1. 下载并解压项目源码![s15161504102025](https://a.okmd.dev/md/67f7705a6e718.png)
 2. 进入项目目录
 3. 运行 `pip install -e .` 安装
 
@@ -90,6 +91,8 @@ write_table_to_docx(
    - 选择导出模式（追加或覆盖）
 3. 点击"预览"查看效果
 4. 点击"导出"保存为Word文档
+
+<img src="./img/1744269602094.png" width="400" alt="GUI界面预览">
 
 ## 参数说明
 
