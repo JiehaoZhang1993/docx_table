@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./docx_table_converter/src"
+    ]
+}
