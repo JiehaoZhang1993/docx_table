@@ -1,119 +1,148 @@
-# DOCX表格转换器
-
-一个简单易用的工具，帮你把Excel、CSV等格式的表格转换成Word文档中的精美表格，再也不用为论文、报告中的表格格式发愁了！
-
-## 为什么需要这个工具？
-
-你是否曾经遇到过这些烦恼：
-- 从Excel复制表格到Word后，格式全乱了
-- 论文中的表格需要三线表格式，手动调整太麻烦
-- 需要处理大量表格数据，一个个调整格式太耗时
-- 表格中有特殊格式（如下标），在Word中难以正确显示
-
-这个工具就是为了解决这些问题而生的！它能够：
-- 自动将Excel、CSV表格转换为Word文档中的表格
-- 支持三线表格式（无竖线，只有横线）
-- 自动处理特殊格式，如下标（如mg L$_{-1}$）
-- 支持多级表头，适合复杂的数据展示
-- 提供友好的图形界面，无需编程知识也能使用
-
-## 功能特点
-
-- 支持从CSV、XLS、XLSX文件导入表格
-- 支持直接从剪贴板粘贴表格数据
-- 导出前可预览表格效果
-- 自定义表格格式（字体、大小、对齐方式等）
-- 支持多级表头
-- 支持特殊格式（如下标）
-- 三线表格式（无竖线）
-- 双语界面（中文和英文）
-
-## 安装方法
-
-目前项目尚未发布到PyPI，你可以通过以下方式安装：
-
-### 方法一：从GitHub克隆
-
-
+ # DOCX Table Converter
+[English](README.md) | [中文](README_zh.md)
+A user-friendly tool that helps you convert Excel, CSV, and other table formats into beautifully formatted tables in Word documents. No more hassle with table formatting in your papers and reports!
+## Why This Tool?
+Have you ever encountered these frustrations:
+- Formatting gets messed up when copying tables from Excel to Word
+- Need three-line table format for academic papers, but manual adjustment is tedious
+- Processing multiple tables is time-consuming
+- Special formats (like subscripts) are difficult to display correctly in Word
+- Need to batch process multiple tables while maintaining consistent formatting
+This tool is created to solve these problems! It can:
+- Automatically convert Excel/CSV tables to Word document tables
+- Support three-line table format (no vertical lines, only horizontal lines)
+- Handle special formats automatically, like subscripts (e.g., mg L$_{-1}$)
+- Support multi-level headers for complex data presentation
+- Support batch processing of multiple tables
+- Provide a user-friendly GUI, no programming knowledge required
+## Features
+- Import tables from CSV, XLS, XLSX files
+- Paste table data directly from clipboard
+- Preview tables before export
+- Customizable table format:
+  - Separate font settings for Chinese and English text
+  - Adjustable font size
+  - Adjustable table border width
+  - Optional bold table caption
+- Support multi-level headers (up to 2 levels)
+- Support special formats (like subscripts)
+- Three-line table format (no vertical lines)
+- Bilingual interface (Chinese and English)
+- Batch processing features:
+  - Import multiple tables simultaneously
+  - Option to merge or save separately
+  - Individual title and description for each table
+  - Preview all tables
+- Save functionality:
+  - Save directly from preview interface
+  - Choose save location
+  - Auto-open generated documents
+## Installation
+The project is not yet published to PyPI. You can install it through:
+### Method 1: Clone from GitHub
 ```bash
 git clone https://github.com/JiehaoZhang1993/docx_table.git
 cd docx_table
 pip install -e .
 ```
-
-### 方法二：直接下载源码
-
-1. 下载并解压项目源码
-2. 进入项目目录
-3. 运行 `pip install -e .` 安装
-
-## 使用方法
-
-### 方法一：作为Python包使用（适合程序员）
-
-如果你熟悉Python，可以直接在代码中调用：
-
+### Method 2: Download Source Code
+1. Download and extract the project source code
+2. Navigate to the project directory
+3. Run `pip install -e .` to install
+## Usage
+### Method 1: As a Python Package
+If you're familiar with Python, you can call it directly in your code:
 ```python
 import pandas as pd
-from docx_table_converter import write_table_to_docx
-
-# 创建一个示例DataFrame
+from docx_table_converter import write_table_to_docx, write_tables_to_docx
+# Single table processing
 df = pd.DataFrame({
-    '样本': ['A', 'B', 'C'],
-    '温度 (°C)': [25, 30, 35],
-    '浓度 (mg L$_{-1}$)': [10, 20, 30],
-    'pH值': [7.0, 7.2, 7.4]
+    'Sample': ['A', 'B', 'C'],
+    'Temperature (°C)': [25, 30, 35],
+    'Concentration (mg L$_{-1}$)': [10, 20, 30],
+    'pH': [7.0, 7.2, 7.4]
 })
-
-# 写入DOCX文件
+# Write single table
 write_table_to_docx(
-    df, 
-    '输出表格.docx',
-    table_caption='表1. 样本数据',
-    table_description='不同样本的实验结果。',
-    font_name='宋体',  # 支持中文字体
+    df=df, 
+    output_path='output_table.docx',
+    table_caption='Table 1. Sample Data',
+    chinese_font='SimSun',
+    english_font='Times New Roman',
     font_size=12,
-    include_index=False,  # 是否包含索引列
-    mode='append'  # 追加到现有文档或创建新文档
+    border_width=1,
+    bold_caption=True,
+    mode='append'
+)
+# Batch process multiple tables
+tables = [df1, df2, df3]  # List of DataFrames or file paths
+captions = ['Table 1', 'Table 2', 'Table 3']
+write_tables_to_docx(
+    tables=tables,
+    captions=captions,
+    output_path='batch_tables.docx',
+    font_name='Times New Roman',
+    font_size=10.5,
+    header_rows=[1, 1, 1],  # Number of header rows for each table
+    separate_files=False  # True to save each table as separate file
 )
 ```
+### Method 2: Using the GUI
+If you're not familiar with programming, you can use the graphical interface:
+1. Run the program: `python run_gui.py`
+2. In the main interface:
+   - Click "Browse" to select Excel/CSV files, or "Paste Table Data" to import from clipboard
+   - Set header rows (0-2 rows)
+   - Customize Chinese and English fonts, font size
+   - Set table caption
+   - Adjust table border width
+   - Choose whether to bold the caption
+3. Click "Preview" to check the result, you can save directly from the preview interface
+4. Click "Export" to save as Word document
+Batch Processing:
+1. Click "Batch Process" button
+2. In the batch processing interface:
+   - Add multiple files or paste multiple tables
+   - Set title and description for each table
+   - Choose whether to merge or save separately
+3. Preview individual or all tables
+4. Click "Export" to complete batch conversion
+## Parameter Reference
+### write_table_to_docx Parameters
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| df | DataFrame | Required | pandas DataFrame to convert |
+| output_path | str | Required | Output DOCX file path |
+| table_caption | str | "Table 1" | Table caption |
+| chinese_font | str | 'SimSun' | Chinese font |
+| english_font | str | 'Times New Roman' | English font |
+| font_size | int | 12 | Font size |
+| header_rows | int | 1 | Number of header rows |
+| mode | str | 'append' | File mode: 'append' or 'overwrite' |
+| border_width | float | 1 | Table border width |
+| bold_caption | bool | True | Whether to bold the table caption |
+### write_tables_to_docx Parameters
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| tables | list | Required | List of DataFrames or file paths |
+| captions | list | Required | List of table captions |
+| output_path | str | Required | Output file path |
+| font_name | str | 'Times New Roman' | Font name |
+| font_size | float | 10.5 | Font size |
+| header_rows | list | None | List of header row counts for each table |
+| separate_files | bool | False | Whether to save each table as separate file |
+## Contribution and Feedback
+Welcome to submit issue reports, feature requests, or contribute code! If you have any questions or suggestions, please contact us through GitHub Issues.
 
-### 方法二：使用图形界面（适合所有用户）
+## License
 
-如果你不熟悉编程，可以使用图形界面：
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-1. 运行程序：`python run_gui.py`
-2. 在界面中：
-   - 点击"浏览"选择Excel或CSV文件，或点击"粘贴表格数据"从剪贴板导入
-   - 设置表头行数
-   - 自定义字体、字号、表格标题和描述
-   - 选择是否包含索引列
-   - 选择导出模式（追加或覆盖）
-3. 点击"预览"查看效果
-4. 点击"导出"保存为Word文档
+This means you are free to:
+* Share — copy and redistribute the material in any medium or format
+* Adapt — remix, transform, and build upon the material
 
-<img src="./img/1744277362148.png" width="400" alt="GUI界面预览">
-
-## 参数说明
-
-`write_table_to_docx` 函数支持以下参数：
-
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| df | DataFrame | 必填 | 要转换的pandas DataFrame |
-| output_path | str | 必填 | 输出DOCX文件路径 |
-| table_caption | str | "Table" | 表格标题 |
-| table_description | str | "" | 表格描述文本 |
-| headers | list | None | 自定义表头，默认使用DataFrame的列名 |
-| font_name | str | 'Times New Roman' | 字体名称 |
-| font_size | int | 12 | 字号 |
-| include_index | bool | False | 是否包含DataFrame的索引列 |
-| mode | str | 'append' | 文件模式：'append'（追加）或'overwrite'（覆盖） |
-
-## 贡献与反馈
-
-欢迎提交问题报告、功能请求或贡献代码！如果你有任何问题或建议，请通过GitHub Issues与我们联系。
-
-## 许可证
-
-MIT
+Under the following terms:
+* Attribution — You must give appropriate credit
+* NonCommercial — You may not use the material for commercial purposes
+* ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license
